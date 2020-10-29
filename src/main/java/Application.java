@@ -11,7 +11,7 @@ public class Application {
     private final static Logger LOG = LogManager.getLogger("Основной класс приложения");
 
     public static void main(String[] args) {
-        LOG.info("===BEGIN===");
+        LOG.info("===START===");
 
         Map<String, User> userMap = new TreeMap<>();
 
@@ -43,8 +43,7 @@ public class Application {
                     "\n}";
             LOG.info(builder);
         }
-        LOG.info("===END===");
-
+        LOG.info("===FINISH===");
     }
 
 }
