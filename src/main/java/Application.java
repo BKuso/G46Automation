@@ -11,16 +11,16 @@ public class Application {
     private final static Logger LOG = LogManager.getLogger("Основной класс приложения");
 
     public static void main(String[] args) {
-        LOG.info("===START===");
+        LOG.info("===BEGIN===");
 
         Map<String, User> userMap = new TreeMap<>();
 
-        User admin = new User("admin", "1234qweqwe");
-        User businessA = new User("businessA", "1234567qweqwe");
+        User admin = new User("administrator", "1234qweqwe");
+        User businessA = new User("business", "1234567qweqwe");
         User customer = new User("customer", "123qweqwe");
 
-        userMap.put("admin", admin);
-        userMap.put("businessA", businessA);
+        userMap.put("administrator", admin);
+        userMap.put("business", businessA);
         userMap.put("customer", customer);
 
         int[] ints = new int[1];
@@ -33,9 +33,9 @@ public class Application {
 
         for (String username : userMap.keySet()){
             User cycleUser = userMap.get(username);
-            String builder = "\nCurrent user data: {" +
+            String builder = "\nUser data: {" +
                     "\n" +
-                    "User id: " +
+                    "Id: " +
                     cycleUser.getId() +
                     "\n" +
                     "Hidden Password: " +
@@ -43,7 +43,7 @@ public class Application {
                     "\n}";
             LOG.info(builder);
         }
-        LOG.info("===FINISH===");
+        LOG.info("===END===");
 
     }
 
