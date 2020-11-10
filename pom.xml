@@ -14,6 +14,22 @@
             <artifactId>log4j-core</artifactId>
             <version>2.13.3</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>5.15.1</version>
+        </dependency>
     </dependencies>
 
 
@@ -26,6 +42,18 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12.4</version>
+                <configuration>
+                    <argLine>-Dname=value1 -Dkey=value2</argLine>
+                    <systemPropertyVariables>
+                        <name1>value11</name1>
+                        <key1>value22</key1>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>
