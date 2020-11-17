@@ -1,19 +1,41 @@
 package tests;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.NoSuchElementException;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import pages.LoginPage;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 import static helpers.ColorPrinter.printMessageInYellow;
 
-public class LoginPageTest extends BaseTest{
+@RunWith(Parameterized.class)
+public class LoginNegativeTest extends BaseTest{
 
     private LoginPage page;
     private String errorMessage;
     private String invalidMessage;
+
+    private String login;
+    private String password;
+
+    public LoginNegativeTest(String login, String password){
+        this.login = login;
+        this.password = password;
+    }
+
+    @Parameterized.Parameters
+    public static Collection<String[]> data(){
+        Collection<String[]> result = new ArrayList<>();
+        result.add(new String[]{"login", "password"});
+        result.add(new String[]{"tester", "tester"});
+        result.add(new String[]{"testGit", "testGit"});
+        result.add(new String[]{"someTest", "123qweqwe"});
+        return result;
+    }
 
     @Before
     public void setPage(){
@@ -29,29 +51,8 @@ public class LoginPageTest extends BaseTest{
     @Test
     public void negativeAuthTest(){
         page.checkAuthFields()
-                .loginNegative("admin", "admin")
-                .validateErrorMessage(errorMessage, true)
-                .returnToLoginPage()
-                .loginNegative("login", "password")
+                .loginNegative(this.login, this.password)
                 .validateErrorMessage(invalidMessage);
-    }
-
-    @Test
-    public void checkPositiveLogin(){
-        try{
-            page.checkAuthFields()
-                    .login(System.getProperty("login"),
-                            System.getProperty("password"))
-                    .validateLogin();
-        } catch (NoSuchElementException e){
-            Assert.fail(e.getMessage());
-        }
-    }
-
-    @Test
-    public void showSystemVars(){
-        System.out.println(System.getProperty("login"));
-        System.out.println(System.getProperty("password"));
     }
 
     @After

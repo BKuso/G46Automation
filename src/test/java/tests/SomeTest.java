@@ -1,23 +1,18 @@
 package tests;
 
-import org.junit.Before;
 import pages.LoginPage;
 
-public class SomeTest extends BaseTest{
+public class SomeTest {
 
-    private LoginPage page;
-
-    @Before
-    public void setPage(){
-        page = new LoginPage(driver);
-        System.out.println();
+   // @DataProvider
+    public Object[][] testData(){
+        return new Object[][]{ {"login", "password"}, {"admin", "admin"} };
     }
 
-    //@Test()
-    public void ourTest(){
-        page.checkAuthFields();
+   // @Test(dataProvider = "testData")
+    public void ourTest(String login, String password){
+        System.out.println("Login: " + login);
+        System.out.println("Password: " + password);
     }
-
-
 }
 
