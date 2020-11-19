@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import static helpers.ColorPrinter.printMessageInYellow;
+import static helpers.FileHelper.readAuthDataFromFile;
 
 @RunWith(Parameterized.class)
 public class LoginNegativeTest extends BaseTest{
@@ -29,12 +30,8 @@ public class LoginNegativeTest extends BaseTest{
 
     @Parameterized.Parameters
     public static Collection<String[]> data(){
-        Collection<String[]> result = new ArrayList<>();
-        result.add(new String[]{"login", "password"});
-        result.add(new String[]{"tester", "tester"});
-        result.add(new String[]{"testGit", "testGit"});
-        result.add(new String[]{"someTest", "123qweqwe"});
-        return result;
+        return readAuthDataFromFile(
+                "/home/bohdan/projectQALight/G46Automation/src/test/resources/data/authData.txt");
     }
 
     @Before

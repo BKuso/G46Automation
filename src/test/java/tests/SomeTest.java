@@ -1,18 +1,21 @@
 package tests;
 
-import pages.LoginPage;
+
+import org.junit.Test;
+
+import java.util.List;
+
+import static helpers.FileHelper.readLinesFromFile;
+import static helpers.FileHelper.writeTextToFile;
 
 public class SomeTest {
 
-   // @DataProvider
-    public Object[][] testData(){
-        return new Object[][]{ {"login", "password"}, {"admin", "admin"} };
+    @Test
+    public void checkFile(){
+        writeTextToFile(
+                "/home/bohdan/projectQALight/G46Automation/src/test/resources/data/out.txt",
+                "First line\nSecond line\nThird line");
     }
 
-   // @Test(dataProvider = "testData")
-    public void ourTest(String login, String password){
-        System.out.println("Login: " + login);
-        System.out.println("Password: " + password);
-    }
 }
 

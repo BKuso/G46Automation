@@ -3,9 +3,10 @@ package pages.issues;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import pages.BaseAuthorizedPage;
 import pages.BasePage;
 
-public class IssuesPage extends BasePage {
+public class IssuesPage extends BaseAuthorizedPage {
 
     private final static String TITLE = "Страница со список задач проекта";
 
