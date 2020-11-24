@@ -2,10 +2,13 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import pages.code.ProjectPage;
 
 import java.util.stream.Collectors;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
 
 public abstract class BaseAuthorizedPage extends BasePage{
@@ -24,17 +27,14 @@ public abstract class BaseAuthorizedPage extends BasePage{
     public ProjectPage searchProject (String projectName){
         driver.findElement(searchField).click();
         driver.findElement(searchField).sendKeys(projectName);
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            log.error(e);
-        }
+        webDriverWait_10.until(elementToBeClickable(searchResults));
         driver.findElements(searchResults).get(1).click();
         return new ProjectPage(driver);
     }
 
     public HomePage logout(){
         driver.findElement(userProfileButton).click();
+        webDriverWait_10.until(elementToBeClickable(signOutButton));
         driver.findElement(signOutButton).click();
         return new HomePage(driver);
     }

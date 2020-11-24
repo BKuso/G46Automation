@@ -7,12 +7,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static com.codeborne.selenide.Selenide.open;
-
 public abstract class BaseTest {
 
-    protected static WebDriver driver;
+    protected WebDriver driver;
 
     @Before
     public void setUp(){
@@ -25,14 +22,10 @@ public abstract class BaseTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("https://github.com/login");
-
-
-   //     open("https://github.com/login");
     }
 
     @After
-    public void tearDown(){
-       // closeWebDriver();
+    public void quit(){
         driver.quit();
     }
 

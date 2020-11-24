@@ -4,10 +4,12 @@ import helpers.Level;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static helpers.ColorPrinter.printColorMessage;
 import static helpers.ColorPrinter.printMessageInYellow;
 import static helpers.Level.INFO;
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
 public class LoginPage extends BasePage{
 
@@ -33,6 +35,7 @@ public class LoginPage extends BasePage{
 
     public MainPage login(String login, String password){
         printColorMessage("Проводится авторизация в приложение", log, INFO);
+        webDriverWait_10.until(elementToBeClickable(loginField));
         driver.findElement(loginField).sendKeys(login);
         driver.findElement(passwordField).sendKeys(password);
         driver.findElement(signInButton).click();

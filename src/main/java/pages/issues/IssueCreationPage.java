@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BaseAuthorizedPage;
 import pages.BasePage;
 
@@ -31,6 +32,7 @@ public class IssueCreationPage extends BaseAuthorizedPage {
         Assert.assertTrue(driver.findElement(issueBodyField).isDisplayed());
         driver.findElement(issueBodyField).sendKeys(body);
         Assert.assertTrue(driver.findElement(labelsShowButton).isDisplayed());
+        webDriverWait_10.until(ExpectedConditions.elementToBeClickable(labelsShowButton));
         driver.findElement(labelsShowButton).click();
         driver.findElements(issueLabels)
                 .stream()
