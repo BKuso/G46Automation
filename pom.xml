@@ -8,6 +8,12 @@
     <artifactId>G46Automation</artifactId>
     <version>0.1.0</version>
 
+    <properties>
+        <browser>${browser}</browser>
+        <driver>${driver}</driver>
+        <driver.path>${driver.path}</driver.path>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -40,6 +46,24 @@
             <artifactId>poi-ooxml</artifactId>
             <version>4.1.2</version>
         </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>4.3.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>4.3.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.18</version>
+        </dependency>
+
     </dependencies>
 
 
@@ -59,14 +83,45 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.12.4</version>
                 <configuration>
-                    <argLine>-Dname=value1 -Dkey=value2</argLine>
-                    <systemPropertyVariables>
-                        <name1>value11</name1>
-                        <key1>value22</key1>
-                    </systemPropertyVariables>
+                    <argLine>-Dbrowser=${browser} -D${driver}=${driver.path}</argLine>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>Chrome</id>
+            <properties>
+                <browser>chrome</browser>
+                <driver>webdriver.chrome.driver</driver>
+                <driver.path>${project.basedir}/src/main/resources/drivers/chrome/v84/chromedriver</driver.path>
+            </properties>
+        </profile>
+        <profile>
+            <id>Firefox</id>
+            <properties>
+                <browser>firefox</browser>
+                <driver>webdriver.gecko.driver</driver>
+                <driver.path>${project.basedir}/src/main/resources/drivers/firefox/v0.28.0/geckodriver</driver.path>
+            </properties>
+        </profile>
+        <profile>
+            <id>InternetExplorer</id>
+            <properties>
+                <browser>firefox</browser>
+                <driver>webdriver.gecko.driver</driver>
+                <driver.path>${project.basedir}/src/main/resources/drivers/firefox/v0.20.0/geckodriver</driver.path>
+            </properties>
+        </profile>
+        <profile>
+            <id>Opera</id>
+            <properties>
+                <browser>firefox</browser>
+                <driver>webdriver.gecko.driver</driver>
+                <driver.path>${project.basedir}/src/main/resources/drivers/firefox/v0.28.0/geckodriver</driver.path>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

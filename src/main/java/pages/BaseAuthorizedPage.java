@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import pages.code.ProjectPage;
+import pages.settings.SettingsPage;
 
 import java.util.stream.Collectors;
 
@@ -28,7 +29,7 @@ public abstract class BaseAuthorizedPage extends BasePage{
         driver.findElement(searchField).click();
         driver.findElement(searchField).sendKeys(projectName);
         webDriverWait_10.until(elementToBeClickable(searchResults));
-        driver.findElements(searchResults).get(1).click();
+        driver.findElements(searchResults).get(0).click();
         return new ProjectPage(driver);
     }
 
