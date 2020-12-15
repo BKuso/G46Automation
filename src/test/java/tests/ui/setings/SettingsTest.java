@@ -15,8 +15,8 @@ public class SettingsTest extends BaseTest {
     @Before
     public void signIn(){
         page = new LoginPage(driver)
-                .login(System.getProperty("login"), System.getProperty("password"))
-                .searchProject("BKuso/G46Automation")
+                .login(System.getProperty("username"), System.getProperty("password"))
+                .searchProject()
                 .openSettingsPage();
     }
 
@@ -29,8 +29,7 @@ public class SettingsTest extends BaseTest {
 
     @After
     public void tearDown(){
-        page.logout()
-                .validateLogOut();
+        page.logout();
     }
 
 }

@@ -1,5 +1,6 @@
 package tests.ui.authorization;
 
+import io.qameta.allure.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +15,7 @@ import static helpers.ColorPrinter.printMessageInYellow;
 import static helpers.FileHelper.readAuthDataFromFile;
 
 @RunWith(Parameterized.class)
+@Owner("BKuso")
 public class LoginNegativeTest extends BaseTest {
 
     private LoginPage page;
@@ -46,6 +48,9 @@ public class LoginNegativeTest extends BaseTest {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Feature("Авторизация")
+    @Story("Негативные сценврии")
     public void negativeAuthTest(){
         page.checkAuthFields()
                 .loginNegative(this.login, this.password)

@@ -1,5 +1,7 @@
 package helpers;
 
+import io.qameta.allure.Step;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ public class DbHelper {
     private static final String USER = "postgres";
     private static final String PASSWORD = "postgres";
 
+    @Step("Выполняю запрос в базу")
     public static void executeQuery(String sqlQuery) {
         Connection connection = null;
         try {
@@ -26,13 +29,13 @@ public class DbHelper {
                     ResultSet.TYPE_FORWARD_ONLY,
                     ResultSet.CONCUR_UPDATABLE
             );
-            statement.executeQuery(sqlQuery);
+           statement.executeQuery(sqlQuery);
         } catch (SQLException s) {
             s.printStackTrace();
         }
     }
 
-    public static List<Object> executeQueryWithResult(String sqlQuery) {
+    public static List<Object> executeQueryWithResult(String sqlQuery, String... fields) {
         List<Object> result = new ArrayList<>();
         Connection connection = null;
         try {
@@ -52,8 +55,9 @@ public class DbHelper {
 
             while (resultSet.next()){
                 List<Object> temp = new ArrayList<>();
-                temp.add(resultSet.getObject("username"));
-                temp.add(resultSet.getObject("password"));
+                for (String field: fields){
+                    temp.add(resultSet.getObject(field));
+                }
                 result.add(temp);
             }
         } catch (SQLException s) {

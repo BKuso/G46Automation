@@ -1,6 +1,7 @@
 package pages.issues;
 
 import helpers.Level;
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -26,6 +27,7 @@ public class IssueInfoPage extends BaseAuthorizedPage {
     private final By description = By.xpath("//td[contains(@class, 'js-comment-body')]");
     private final By labels = By.xpath("//*[@class = 'lh-condensed-ultra']");
 
+    @Step("Проверяем корректность создания задачи")
     public IssueInfoPage validateCreatedIssue(String titleText, String body, List<String> testLabels){
         printColorMessage("Проверяется созданная задача", log, Level.INFO);
         try {

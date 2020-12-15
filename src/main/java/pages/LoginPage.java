@@ -1,6 +1,7 @@
 package pages;
 
 import helpers.Level;
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -26,6 +27,7 @@ public class LoginPage extends BasePage{
         super(driver, TITLE);
     }
 
+    @Step("Вводим неганивные авторизационные данные")
     public LoginPage loginNegative(String login, String password){
         driver.findElement(loginField).sendKeys(login);
         driver.findElement(passwordField).sendKeys(password);
@@ -48,6 +50,7 @@ public class LoginPage extends BasePage{
         return this;
     }
 
+    @Step("Проверяем наличие сообщения об ошибке")
     public LoginPage validateErrorMessage(String message){
         Assert.assertEquals(message, driver.findElement(this.message).getText());
         return this;
@@ -58,6 +61,7 @@ public class LoginPage extends BasePage{
         return new LoginPage(driver);
     }
 
+    @Step("Проверяем наличие необходимых для авторизации полей")
     public LoginPage checkAuthFields(){
         printColorMessage("Валидируются поля для авторизации", log, INFO);
         Assert.assertTrue("Поле Логин видимо", this.driver.findElement(loginField).isDisplayed());

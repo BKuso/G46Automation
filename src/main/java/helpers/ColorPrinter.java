@@ -1,11 +1,13 @@
 package helpers;
 
+import io.qameta.allure.Step;
 import org.apache.logging.log4j.Logger;
 
 import static helpers.ConsoleColors.*;
 
 public class ColorPrinter {
 
+    @Step("Красим логи в жёлтый цвет")
     public static void printMessageInYellow(String message){
         System.out.println(BLUE_BACKGROUND + YELLOW + message + RESET);
     }

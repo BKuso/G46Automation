@@ -1,7 +1,9 @@
 package tests.ui.issues;
 
+import io.qameta.allure.*;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -39,11 +41,18 @@ public class IssueCreationTest extends BaseTest {
     @Before
     public void signIn(){
         page = new LoginPage(driver)
-                .login(System.getProperty("login"), System.getProperty("password"))
-                .searchProject("G46Automation")
+                .login(System.getProperty("username"), System.getProperty("password"))
+                .searchProject()
                 .openProjectIssues();
     }
 
+    @Owner("BKuso")
+    @Feature("")
+    @Stories({@Story("Issue Creation"), @Story("GitHub")})
+    @Link("G-46")
+    @TmsLink("TC-2")
+    @Description("Please ignore me!")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void checkIssueCreation(){
         page.pressToCreateNewIssue()
@@ -53,8 +62,7 @@ public class IssueCreationTest extends BaseTest {
 
     @After
     public void tearDown(){
-        page.logout()
-            .validateLogOut();
+        page.logout();
     }
 
 }

@@ -6,6 +6,7 @@ import io.restassured.config.RestAssuredConfig;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
+import listeners.RestAssuredAllureFilter;
 import org.junit.Before;
 
 import static io.restassured.RestAssured.config;
@@ -19,6 +20,7 @@ public abstract class BaseApiTest {
     public void setSpecs(){
         reqspec = new RequestSpecBuilder()
                 .log(LogDetail.ALL)
+                .addFilter(new RestAssuredAllureFilter())
                 .build();
         resSpec = new ResponseSpecBuilder()
                 .expectStatusCode(200)

@@ -1,6 +1,7 @@
 package tests.ui;
 
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import static helpers.util.ExcelHelper.*;
 public class SomeTest {
 
     @Test
+    @Ignore
     public void checkFile(){
         List<String> testData = new ArrayList<>();
         testData.add("One");

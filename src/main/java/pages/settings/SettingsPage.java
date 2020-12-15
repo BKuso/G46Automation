@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import pages.BaseAuthorizedPage;
 import pages.code.ProjectPage;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
+
 public class SettingsPage extends BaseAuthorizedPage {
 
     private final static String TITLE = "";
@@ -20,6 +22,7 @@ public class SettingsPage extends BaseAuthorizedPage {
     public ProjectPage renameRepository(String newName){
         driver.findElement(newNameField).clear();
         driver.findElement(newNameField).sendKeys(newName);
+        webDriverWait_15.until(elementToBeClickable(newNameApplyButton));
         driver.findElement(newNameApplyButton).click();
         return new ProjectPage(driver);
     }

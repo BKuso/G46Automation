@@ -24,7 +24,7 @@ public class LoginPositiveTest extends BaseTest {
     public void checkPositiveLogin(){
         try{
             page.checkAuthFields()
-                    .login(System.getProperty("login"),
+                    .login(System.getProperty("username"),
                             System.getProperty("password"))
                     .validateLogin();
         } catch (NoSuchElementException e){

@@ -1,25 +1,12 @@
 package models;
 
-public class User {
+import org.javalite.activejdbc.Model;
+import org.javalite.activejdbc.annotations.BelongsTo;
+import org.javalite.activejdbc.annotations.DbName;
+import org.javalite.activejdbc.annotations.Table;
 
-    private String username;
-    private String password;
+@DbName("study")
+@Table("public.users")
+public class User extends Model {
 
-    public String getUsername() {
-        return username;
-    }
-
-    public User setUsername(String username) {
-        this.username = username;
-        return this;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public User setPassword(String password) {
-        this.password = password;
-        return this;
-    }
 }

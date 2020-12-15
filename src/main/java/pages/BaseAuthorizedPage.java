@@ -33,6 +33,11 @@ public abstract class BaseAuthorizedPage extends BasePage{
         return new ProjectPage(driver);
     }
 
+    public ProjectPage searchProject(){
+        driver.get("https://github.com/BKuso/G46Automation2");
+        return new ProjectPage(driver);
+    }
+
     public HomePage logout(){
         driver.findElement(userProfileButton).click();
         webDriverWait_10.until(elementToBeClickable(signOutButton));
