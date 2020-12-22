@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+    <modelVersion>3.6.3</modelVersion>
 
     <groupId>org.qalight</groupId>
     <artifactId>G46Automation</artifactId>
@@ -117,7 +117,7 @@
                     </argLine>
                     <systemPropertyVariables>
                         <username>BKuso</username>
-                        <password></password>
+                        <password>Ovrush20</password>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                     </systemPropertyVariables>
                     <properties>

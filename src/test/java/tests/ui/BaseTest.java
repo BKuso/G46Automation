@@ -16,13 +16,17 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTest {
 
-    protected WebDriver driver;
+    protected RemoteWebDriver driver;
+    protected RemoteWebDriver remoteWebDriver;
 
     @Rule
     public TestWatcher watcher = new TestWatcher() {
@@ -64,6 +68,16 @@ public abstract class BaseTest {
             default:
                 driver = new FirefoxDriver();
                 break;
+        }
+        if (Boolean.parseBoolean(System.getProperty("remote.launch", "false"))){
+            try {
+
+                remoteWebDriver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), new DesiredCapabilities());
+
+            }
+            catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
         }
 
         driver.manage().window().maximize();
