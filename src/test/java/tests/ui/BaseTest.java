@@ -26,6 +26,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.System.getProperty;
+
 public abstract class BaseTest {
 
     protected RemoteWebDriver driver;
@@ -58,11 +60,11 @@ public abstract class BaseTest {
 
     @Before
     public void setUp(){
-        if (Boolean.parseBoolean(System.getProperty("remote.launch", "false"))){
+        if (Boolean.parseBoolean(getProperty("remote.launch", "false"))){
             try {
                 Map<String, Object> capMap = new HashMap<>();
-                capMap.put("browserName", "firefox");
-                capMap.put("version", "70.0");
+                capMap.put("browserName", getProperty("browser", "crome"));
+                capMap.put("version", getProperty("browser").equals("chrome") ? "78.0" : "70.0");
                 capMap.put("enableVNC", true);
                 capMap.put("enableVideo", false);
                 Capabilities caps = new DesiredCapabilities(capMap);
@@ -73,7 +75,7 @@ public abstract class BaseTest {
             }
         }
         else {
-            switch (System.getProperty("browser", "chrome")) {
+            switch (getProperty("browser", "chrome")) {
                 case "chrome":
                     driver = new ChromeDriver();
                     break;
