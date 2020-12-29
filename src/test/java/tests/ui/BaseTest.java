@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -21,12 +22,13 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTest {
 
     protected RemoteWebDriver driver;
-    protected RemoteWebDriver remoteWebDriver;
 
     @Rule
     public TestWatcher watcher = new TestWatcher() {
@@ -56,29 +58,36 @@ public abstract class BaseTest {
 
     @Before
     public void setUp(){
-        switch (System.getProperty("browser", "chrome")){
-            case "chrome":
-                driver = new ChromeDriver();
-                break;
-            case "opera":
-                driver = new OperaDriver();
-            case "ie":
-                driver = new InternetExplorerDriver();
-                break;
-            default:
-                driver = new FirefoxDriver();
-                break;
-        }
         if (Boolean.parseBoolean(System.getProperty("remote.launch", "false"))){
             try {
-
-                remoteWebDriver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), new DesiredCapabilities());
-
+                Map<String, Object> capMap = new HashMap<>();
+                capMap.put("browserName", "firefox");
+                capMap.put("version", "70.0");
+                capMap.put("enableVNC", true);
+                capMap.put("enableVideo", false);
+                Capabilities caps = new DesiredCapabilities(capMap);
+                driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), caps);
             }
             catch (MalformedURLException e) {
                 e.printStackTrace();
             }
         }
+        else {
+            switch (System.getProperty("browser", "chrome")) {
+                case "chrome":
+                    driver = new ChromeDriver();
+                    break;
+                case "opera":
+                    driver = new OperaDriver();
+                case "ie":
+                    driver = new InternetExplorerDriver();
+                    break;
+                default:
+                    driver = new FirefoxDriver();
+                    break;
+            }
+        }
+
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
