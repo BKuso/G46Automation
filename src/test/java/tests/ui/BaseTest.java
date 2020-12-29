@@ -66,7 +66,7 @@ public abstract class BaseTest {
                 capMap.put("enableVNC", true);
                 capMap.put("enableVideo", false);
                 Capabilities caps = new DesiredCapabilities(capMap);
-                driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), caps);
+                driver = new RemoteWebDriver(new URL("http://172.17.0.6:4444/wd/hub"), caps);
             }
             catch (MalformedURLException e) {
                 e.printStackTrace();
